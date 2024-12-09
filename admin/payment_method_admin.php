@@ -1,0 +1,151 @@
+<?php
+session_start();
+include('data_queries/config.php');
+if (!isset($_SESSION['admin_id'])) {
+    header("Location: ../../login.php");
+    exit();
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administrator Dashboard</title>
+    <link rel="icon" href="../assets/logo.jpg" type="image/x-icon">
+
+    <!--CSS SHEET-->
+    <link rel="stylesheet" href="style.css" />
+    <!--Google Fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ultra&display=swap"
+        rel="stylesheet" />
+
+    <!--Bootstrap Icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+
+    <!--Taiwind Framework-->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!--Taiwind config (to avoid conflict)-->
+    <script>
+        tailwind.config = {
+            prefix: "tw-",
+        };
+    </script>
+</head>
+
+<body class="bg-black lg:tw-p-5 md:tw-p-3 tw-p-0">
+    <!--NAVIGATION-->
+    <?php include 'header.php' ?>
+
+    <!--search_id_users-->
+    <?php include 'data_queries/search_id_users.php' ?>
+
+
+
+    <!--SEARCH ID USER-->
+    <div class="container-fluid e md:tw-p-10 tw-p-7 tw-mt-20 tw-flex tw-items-center tw-justify-center text-white">
+    <div class="tw-w-full md:tw-w-3/4 tw-bg-[#9603a1] tw-p-10 tw-rounded-xl tw-shadow-lg tw-flex tw-flex-col md:tw-flex-row tw-items-center">
+        <!-- Content Section -->
+        <div class="tw-w-full md:tw-w-1/2 tw-pr-8">
+            <div class="tw-flex tw-items-center tw-justify-between tw-mb-8">
+                <h1 class="tw-text-4xl tw-font-bold tw-text-white tw-tracking-wide">Payment</h1>
+                <div class="tw-hidden md:tw-flex tw-items-center">
+                    <img src="../assets/Review.png" alt="" class="tw-w-6 tw-h-6 tw-mr-2">
+                    <a href="payment_history_admin.php" class="tw-text-white tw-font-bold tw-underline tw-text-lg hover:tw-text-gray-200">Payment History</a>
+                </div>
+            </div>
+
+            <!-- Search Name for Payment -->
+            <?php include 'data_queries/payment_method.php' ?>
+
+            <div class="tw-space-y-6">
+                <!-- Search Input -->
+                <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="get">
+                    <div class="form-group tw-w-full">
+                        <input
+                            type="text"
+                            class="form-control tw-w-full tw-px-4 tw-py-3 tw-rounded-lg tw-bg-gray-100 tw-text-black focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-green-400"
+                            placeholder="Search for account ID"
+                            name="users_id"
+                        >
+                    </div>
+                    <div class="mt-4">
+                    <a
+                        class="tw-text-white tw-font-bold tw-py-1 tw-px-2 tw-rounded-lg tw-transition-all hover:tw-bg-[#00FFAE] hover:tw-text-black tw-duration-300 tw-border-2"
+                        href="walk_in_users.php"
+                    >
+                        Walk in
+                    </a>
+                    </div>
+                  
+                </form>
+
+                <!-- Name Input -->
+                <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
+                    <div class="form-group tw-w-full">
+                        <label for="name" class="tw-text-white tw-font-medium">Name</label>
+                        <input
+                            type="text"
+                            class="form-control tw-w-full tw-px-4 tw-py-3 tw-rounded-lg tw-bg-gray-100 tw-text-black focus:tw-outline-none"
+                            name="fullname"
+                            value="<?php echo htmlspecialchars(@$_SESSION['fullname']) ?>"
+                            disabled
+                            placeholder="Fullname"
+                        >
+                    </div>
+
+                    <!-- Payment Options -->
+                    <div class="tw-flex tw-items-center tw-gap-4 tw-mt-6">
+                        <select
+                            name="session_monthly"
+                            id="session_monthly"
+                            class="tw-bg-gray-100 tw-px-4 tw-py-3 tw-rounded-lg tw-text-black focus:tw-outline-none tw-w-full"
+                        >
+                            <option value="">Payment for</option>
+                            <option value="monthly">Monthly</option>
+                            <option value="session">Session</option>
+                        </select>
+                        <button
+                            class="tw-bg-[#00e69d] tw-text-black tw-font-bold tw-py-2 tw-px-4 tw-rounded-lg tw-transition-all hover:tw-bg-[#00FFAE]"
+                        type="submit"
+                            name="submit_reciept"
+                        >
+                            Confirm
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Image Section -->
+        <div class="tw-w-full md:tw-w-1/2 tw-flex tw-items-center tw-justify-center tw-mt-10 md:tw-mt-0">
+            <img
+                src="../assets/logo.jpg"
+                alt="Logo"
+               
+            >
+        </div>
+    </div>
+</div>
+
+
+
+ 
+
+    <!--Bootstrap JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
