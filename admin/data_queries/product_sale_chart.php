@@ -29,22 +29,20 @@ $total_sales_js = json_encode($total_sales);
   <!-- JS CHART -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<div>
-  <canvas id="monthlyChart" width="400" height="200"></canvas>
-</div>
+
 
 <script>
   const ctx4 = document.getElementById('monthlyChart4').getContext('2d');
 
   new Chart(ctx4, {
-    type: 'bar',
+    type: 'line',
     data: {
       labels: <?php echo $months_js; ?>, // Dynamically generated month names
       datasets: [{
         label: 'Monthly Product Sales (Total Amount)',
         data: <?php echo $total_sales_js; ?>, // Dynamically generated total sales
-        backgroundColor: 'rgba(54, 162, 235, 0.5)', // Blue
-        borderColor: 'rgba(54, 162, 235, 1)', // Blue border
+        backgroundColor: '#F1C40F', // Blue
+        borderColor: '#F1C40F', // Blue border
         borderWidth: 1
       }]
     },

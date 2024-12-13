@@ -50,12 +50,13 @@
 
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="username_email" required>
-                            <label for="floatingInput">Email or Username</label>
+                            <label for="floatingInput">Username</label>
                         </div>
 
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="password" required>
                             <label for="floatingInput">Password</label>
+                            <p class="error_message tw-text-sm tw-text-red-500" ><?php echo $error_mess ?></p>
                         </div>
 
                         <div class="forgot text-end mb-3">

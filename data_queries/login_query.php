@@ -1,7 +1,7 @@
 <?php
 session_start();
 include 'config.php';
-
+$error_mess = "";
 if (isset($_POST['btn-signin']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve and sanitize user inputs
     $username_email = trim($_POST['username_email']);
@@ -70,12 +70,8 @@ if (isset($_POST['btn-signin']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
                 header("Location: user/index.php");
                 exit();
             } elseif ($user['role'] === 'admin') {
-                $_SESSION['users_account_id'] = $user['users_account_id'];
                 $_SESSION['admin_id'] = $user['users_account_id'];
                 $_SESSION['admin_name'] = $user['fullname'];
-                $_SESSION['fullname'] = $user['fullname'];
-                $_SESSION['expiration_membership'] = $user['expiration_membership'];
-                $_SESSION['role'] = $user['role'];
                 header("Location: admin/dashboard-admin.php");
                 exit();
             } elseif ($user['role'] === 'super_admin') {
@@ -87,7 +83,7 @@ if (isset($_POST['btn-signin']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         } else {
             // Handle invalid credentials
-            echo "<script>alert('Invalid email or password. Please try again.');</script>";
+            $error_mess = "*Invalid email or password. Please try again.";
         }
 
         // Close statement

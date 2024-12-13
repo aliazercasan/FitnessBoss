@@ -1,7 +1,7 @@
 <?php
 // Include the database configuration
 include 'config.php';
-
+$error_mess="";
 if (isset($_POST['btn-changepassword']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     // Retrieve and sanitize user inputs
     $email_username = trim($_POST['email_username']);
@@ -10,13 +10,14 @@ if (isset($_POST['btn-changepassword']) && $_SERVER['REQUEST_METHOD'] == 'POST')
 
     // Input validation
     if (empty($email_username) || empty($new_password) || empty($confirm_password)) {
-        echo "<script>alert('All fields are required.');</script>";
+        $error_mess ="*All fields are required.";
     } elseif ($new_password !== $confirm_password) {
-        echo "<script>alert('Passwords do not match.');</script>";
+        $error_mess ="*Passwords do not match.";
+
     } elseif (strlen($new_password) < 6) {
         echo "<script>alert('Password must be at least 6 characters long.');</script>";
     } elseif (!preg_match('/[A-Z]/', $new_password) || !preg_match('/[\W]/', $new_password)) {
-        echo "<script>alert('Password must contain at least one uppercase letter and one special character.');</script>";
+        $error_mess ="*Password must contain at least one uppercase letter and one special character.";
     } else {
         // Check if the user exists in the database
         $check_user_query = "SELECT * FROM tbl_users_account WHERE username_email = ?";

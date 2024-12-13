@@ -19,12 +19,12 @@ if (isset($_POST['walk_in_submit']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($walk_in_name)) {
         echo "<script>alert('Walk-in name must not be empty.');</script>";
     } else {
-        $category = "walk_in";
+        $category = "walk-in";
         $amount = 120;
 
         // Insert payment history
         $sql = "INSERT INTO walk_in_users 
-                (name, reference_number, category, amount, date_expiration, payment_created) 
+                (fullname, reference_number, category, amount, date_expiration, payment_created) 
                 VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = $conn->prepare($sql);
 

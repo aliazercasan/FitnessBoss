@@ -84,8 +84,9 @@ $result = $stmt->get_result();
         };
     </script>
 </head>
+<?php include 'header.php' ?>
 
-<body class="bg-black lg:tw-p-5 md:tw-p-3 tw-p-0">
+<body class="bg-black lg:tw-p-5 md:tw-p-3 tw-p-0 tw-min-h-screen tw-overflow-hidden">
 
     <div class="container-fluid tw-min-h-screen tw-flex tw-flex-col">
         <div class="d-flex align-items-center justify-content-start">
@@ -109,47 +110,49 @@ $result = $stmt->get_result();
 
             <div class="col-12 col-md-12 col-lg-12 tw-mx-auto tw-my-5">
                 <div class="table-responsive">
-                    <table class="table table-dark table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th scope="col">Account ID</th>
-                                <th scope="col">Fullname</th>
-                                <th scope="col">Membership Expired</th>
-                                <th scope="col">
-                                    <div class="btn-group">
-                                        <button type="button" class=" dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Status
-                                        </button>
-                                        <ul class="dropdown-menu bg-black ">
-                                            <li><a class="dropdown-item hover:tw-bg-[#00FFAE] tw-text-[#00FFAE] tw-transition-ease-in-out tw-duration-200" href="#">Active</a></li>
-                                            <li><a class="dropdown-item dropdown-item hover:tw-bg-yellow-500 tw-text-yellow-500 tw-transition-ease-in-out tw-duration-200" href="#">Inactive</a></li>
-                                        </ul>
-                                    </div>
-                                </th>
-                                <th scope="col">Type of Membership</th>
-                                <th scope="col">Account Created</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php while ($row = $result->fetch_assoc()) { ?>
+                    <div class="tw-overflow-x-auto tw-max-h-96 tw-scrollbar-thin tw-scrollbar-thumb-gray-400 tw-scrollbar-track-gray-200">
+                        <table class="table table-dark table-striped table-bordered">
+                            <thead class="table table-dark tw-w-full">
                                 <tr>
-                                    <td><?php echo htmlspecialchars($row['users_account_id']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['fullname']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['expiration_membership']); ?></td>
-                                    <td><?php
-                                        if ($row['status'] == 'active') {
-                                            echo '<span class="tw-text-[#00FFAE]">active</span>';
-                                        } else {
-                                            echo '<span class="tw-text-[#EA3EF7]">inactive</span>';
-                                        }
-                                    ?></td>
-                                    <td><?php echo htmlspecialchars($row['type_member']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['account_created']); ?></td>
+                                    <th scope="col">Account ID</th>
+                                    <th scope="col">Fullname</th>
+                                    <th scope="col">Membership Expired</th>
+                                    <th scope="col">
+                                        <div class="btn-group">
+                                            <button type="button" class=" dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Status
+                                            </button>
+                                            <ul class="dropdown-menu bg-black ">
+                                                <li><a class="dropdown-item hover:tw-bg-[#00FFAE] tw-text-[#00FFAE] tw-transition-ease-in-out tw-duration-200" href="#">Active</a></li>
+                                                <li><a class="dropdown-item dropdown-item hover:tw-bg-yellow-500 tw-text-yellow-500 tw-transition-ease-in-out tw-duration-200" href="#">Inactive</a></li>
+                                            </ul>
+                                        </div>
+                                    </th>
+                                    <th scope="col">Type of Membership</th>
+                                    <th scope="col">Account Created</th>
+
                                 </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                <?php while ($row = $result->fetch_assoc()) { ?>
+                                    <tr>
+                                        <td><?php echo htmlspecialchars($row['users_account_id']); ?></td>
+                                        <td><?php echo htmlspecialchars($row['fullname']); ?></td>
+                                        <td><?php echo htmlspecialchars($row['expiration_membership']); ?></td>
+                                        <td><?php
+                                            if ($row['status'] == 'active') {
+                                                echo '<span class="tw-text-[#00FFAE]">active</span>';
+                                            } else {
+                                                echo '<span class="tw-text-[#EA3EF7]">inactive</span>';
+                                            }
+                                            ?></td>
+                                        <td><?php echo htmlspecialchars($row['type_member']); ?></td>
+                                        <td><?php echo htmlspecialchars($row['account_created']); ?></td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

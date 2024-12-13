@@ -135,6 +135,8 @@ if (!isset($_SESSION['admin_id'])) {
                             <label for="floatingInput">Phone Number</label>
                         </div>
                     </div>
+
+                    
                     <!--Email or Username-->
                     <div class="username-email tw-mb-3 mt-3">
                         <div class="form-floating mb-3">
@@ -146,7 +148,7 @@ if (!isset($_SESSION['admin_id'])) {
                     <!--Passsword-->
                     <div class="password tw-mb-3">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="password" required>
+                            <input type="password" class="form-control" id="floatingInput" placeholder="name@example.com" name="password" required>
                             <label for="floatingInput">Password</label>
                         </div>
 

@@ -41,8 +41,8 @@ $incomes_js = json_encode($incomes);
         datasets: [{
           label: 'Monthly Count',
           data: <?php echo $incomes_js; ?>, // Use dynamically generated incomes
-          backgroundColor: 'rgba(54, 162, 235, 0.5)', // Blue
-          borderColor: 'rgba(54, 162, 235, 1)', // Blue border
+          backgroundColor: '#FF4500', // Blue
+          borderColor: '#FF4500', // Blue border
           borderWidth: 1
         }]
       },

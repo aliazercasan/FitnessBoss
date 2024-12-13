@@ -69,9 +69,17 @@ if (!isset($_SESSION['users_account_id'])) {
 
     <div class="tw-flex tw-flex-col tw-items-center tw-justify-center  tw-px-4 container md:tw-mt-0  tw-mt-40">
         <!-- Search Bar -->
-        <div class="tw-w-full tw-mb-4 tw-flex tw-justify-center">
-            <input type="text" id="searchBar" class="form-control tw-w-full md:tw-w-1/2 tw-p-2 tw-border tw-border-gray-300 tw-rounded-lg" placeholder="Search by Account ID or Name">
+        <div class="tw-w-full tw-mb-4 tw-flex tw-justify-end">
+
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="purchased_product.php">Purchased Products</a></li>
+                </ul>
+            </div>
         </div>
+
 
         <!-- Table Container -->
         <div class="tw-overflow-x-auto tw-w-full">
@@ -245,24 +253,6 @@ if (!isset($_SESSION['users_account_id'])) {
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 
-    <!-- Search Functionality -->
-    <script>
-        document.getElementById('searchBar').addEventListener('keyup', function() {
-            const filter = this.value.toLowerCase();
-            const rows = document.querySelectorAll('#dataTable tbody tr');
-
-            rows.forEach(row => {
-                const accountId = row.cells[0].textContent.toLowerCase();
-                const name = row.cells[1].textContent.toLowerCase();
-
-                if (accountId.includes(filter) || name.includes(filter)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        });
-    </script>
 </body>
 
 </html>

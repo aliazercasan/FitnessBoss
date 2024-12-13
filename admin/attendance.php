@@ -44,10 +44,9 @@ session_regenerate_id(true);
     </script>
 </head>
 
+<!-- Navigation -->
+<?php include 'header.php'; ?>
 <body class="tw-bg-black">
-    <!-- Navigation -->
-    <?php include 'header.php'; ?>
-
     <!-- attendance_query -->
     <?php include 'data_queries/attendance_query.php'; ?>
 

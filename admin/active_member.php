@@ -64,7 +64,8 @@ if (!isset($_SESSION['admin_id'])) {
     ON 
         tbl_users_info.user_info_id = tbl_users_account.user_info_id 
     WHERE 
-        tbl_users_account.type_member IN ('vip', 'regular');
+        tbl_users_account.type_member IN ('vip', 'regular')
+        AND tbl_users_account.status = 'active';
     ";
 
     $result = $conn->query($sql);
@@ -101,8 +102,10 @@ if (!isset($_SESSION['admin_id'])) {
                                         Status
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="active_member.php">Active</a></li>
+                                        <li><a class="dropdown-item" href="members.php">Over all </a></li>
+                                        <li><a class="dropdown-item" href="#">Active</a></li>
                                         <li><a class="dropdown-item" href="inactive_member.php">Inactive </a></li>
+
                                     </ul>
                                 </div>
                             </th>

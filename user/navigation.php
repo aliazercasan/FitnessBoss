@@ -28,19 +28,15 @@
                         </a>
                     </div>
                 </li>
-                <li class="nav-item md:tw-my-0 tw-my-5 ">
-                    <div class="d-flex align-items-center">
-                        <img src="../assets/Personal Trainer to.png" alt="">
-                        <a class="nav-link tw-text-slate-400 hover:tw-text-slate-200" href="#coaches">Coaches</a>
-                    </div>
-                </li>
+                
 
                 <div class="dropdown mt-3 mb-2 tw-block text-end lg:tw-hidden">
                     <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="tw-text-[#EA3EF7] tw-text-3xl"><i class="bi bi-person-circle"></i></span>
                     </button>
                     <ul class="dropdown-menu tw-bg-black">
-                        <li class=""><a class="dropdown-item hover:tw-bg-[#00FFAE] tw-text-[#00FFAE] tw-transition-ease-in-out tw-duration-200" href="#">Profile</a></li>
+                        <li class=""><a class="dropdown-item hover:tw-bg-[#00FFAE] tw-text-[#00FFAE] tw-transition-ease-in-out tw-duration-200" href="profile.php">Profile</a></li>
+
                         <li><a class="dropdown-item hover:tw-bg-red-500 tw-text-red-500 tw-transition-ease-in-out tw-duration-200 hover:tw-text-black" href="data_queries/destroy_logout.php">Logout</a></li>
                     </ul>
                 </div>
@@ -53,9 +49,9 @@
                 <span class="tw-text-[#EA3EF7] tw-text-3xl"><i class="bi bi-person-circle"></i></span>
             </button>
             <ul class="dropdown-menu tw-bg-black">
-                <li class=""><a class="dropdown-item hover:tw-bg-[#00FFAE] tw-text-[#00FFAE] tw-transition-ease-in-out tw-duration-200" href="#">Profile</a></li>
+                <li class=""><a class="dropdown-item hover:tw-bg-[#00FFAE] tw-text-white tw-transition-ease-in-out tw-duration-200" href="profile.php">Profile</a></li>
                 
-                <li><a class="dropdown-item hover:tw-bg-red-500 tw-text-red-500 tw-transition-ease-in-out tw-duration-200 hover:tw-text-black" href="data_queries/destroy_logout.php">Logout</a></li>
+                <li><a class="dropdown-item hover:tw-bg-red-500 tw-text-white tw-transition-ease-in-out tw-duration-200 hover:tw-text-black" href="data_queries/destroy_logout.php">Logout</a></li>
             </ul>
         </div>
     </div>

@@ -93,7 +93,7 @@ if ($current_hour >= 6 && $current_hour < 12) {
       <div class="header d-flex justify-content-start align-items-center">
         <img src="../assets/book.png" alt="" width="70">
         <div class="dropdown">
-          <button class=" tw-bg-transparent tw-active:outline-none dropdown-toggle tw-text-xl ">
+          <button class=" tw-bg-transparent tw-active:outline-none tw-text-xl ">
             Daily Logs
           </button>
 
@@ -106,7 +106,7 @@ if ($current_hour >= 6 && $current_hour < 12) {
 
       <div class="tw-flex tw-justify-between tw-items-center">
         <div class="md:tw-ms-10 tw-mb-5 tw-ms-0 md:tw-text-start tw-text-center md:tw-mt-10 tw-mt-0 ">
-          <p class="tw-text-6xl tw-font-bold"><?php echo htmlspecialchars($users_attendance) ?></p>
+          <p class="tw-text-6xl tw-font-bold"><?php echo htmlspecialchars($total_count) ?></p>
           <p class="tw-text-md">Today's Attendance</p>
         </div>
         <div class="md:tw-me-10 tw-ms-0 tw-bg-black tw-px-5 tw-py-2 tw-rounded-lg">
@@ -119,20 +119,12 @@ if ($current_hour >= 6 && $current_hour < 12) {
       </div>
     </div>
 
-    <!--Product Sold -->
+    <!--Product -->
     <div class="card  tw-bg-[#003323] text-white p-2">
-      <div class="header d-flex justify-content-around align-items-center">
-        <img src="../assets/Best Seller.png" alt="" width="70">
-        <h1 class="tw-text-xl">Products Sold</h1>
-        <div class="dropdown">
-          <button class=" px-2 py-1 tw-rounded-lg text-white tw-text-sm tw-active:outline-none dropdown-toggle tw-border-2 tw-border-[#00FFAE] tw-bg-transparent" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Daily
-          </button>
-          <ul class="dropdown-menu tw-bg-white">
-            <li><a class="dropdown-item" href="#">Monthly</a></li>
-            <li><a class="dropdown-item" href="#">Yearly</a></li>
-          </ul>
-        </div>
+      <div class="header d-flex justify-content-center align-items-center">
+        <img src="../assets/Open Box.png" alt="" width="70">
+        <h1 class="tw-text-xl">Products</h1>
+        
       </div>
       <div class="text-center mt-4">
         <div class="discription d-flex justify-content-around md:tw-text-xs tw-text-md">
@@ -149,7 +141,7 @@ if ($current_hour >= 6 && $current_hour < 12) {
       </div>
 
       <div class="text-center mt-3 tw-text-sm tw-underline">
-        <a href="products.php">View specific product sales</a>
+        <a href="products.php">Buy a product</a>
       </div>
     </div>
 
@@ -157,8 +149,8 @@ if ($current_hour >= 6 && $current_hour < 12) {
     <div class="card  tw-bg-[#003323] text-white">
       <div class="header d-flex justify-content-between align-items-center">
         <div class="d-flex align-items-center">
-          <img src="../assets/Alarm.png" alt="" width="70">
-          <p class="tw-text-xl ms-3">Alerts</p>
+          <img src="../assets/Check Mark.png" alt="" width="70">
+          <p class="tw-text-xl ms-3">Activities</p>
         </div>
       </div>
       <!--count_active-->
@@ -182,7 +174,7 @@ if ($current_hour >= 6 && $current_hour < 12) {
           <!--View All-->
           <div class="tw-flex tw-items-center mb-2">
             <img src="../assets/Analyze.png" alt="" width="30" class="me-3">
-            <a href="total_users.php">View All</a>
+            <a href="members.php">View All</a>
           </div>
         </div>
 

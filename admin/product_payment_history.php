@@ -5,7 +5,7 @@ if (!isset($_SESSION['admin_id'])) {
     exit();
 }
 
-include 'data_queries/monthly_sales_report_query.php'
+include 'data_queries/products_sales_query.php'
 ?>
 
 <!DOCTYPE html>
@@ -39,37 +39,34 @@ include 'data_queries/monthly_sales_report_query.php'
         };
     </script>
 </head>
+<!-- NAVIGATION -->
 <?php include 'header.php' ?>
+<?php include 'data_queries/products_sales_query.php' ?>
+
 
 <body class="bg-black lg:tw-p-5 md:tw-p-3 tw-p-0 tw-min-h-screen tw-overflow-hidden">
-    <div class="container-fluid tw-min-h-screen tw-flex tw-flex-col">
+    <div class="container-fluid  tw-flex tw-flex-col  ">
         <div class="d-flex align-items-center justify-content-start tw-mt-20">
             <a href="dashboard-admin.php" class="tw-text-[#EA3EF7] tw-text-3xl tw-mb-3 me-3"><i class="bi bi-arrow-90deg-left"></i></a>
             <img src="../assets/Total Sales.png" alt="">
-            <h1 class="tw-text-3xl tw-font-bold tw-text-white tw-mb-3 ms-1">Monthly Subscription Report</h1>
+            <h1 class="tw-text-3xl tw-font-bold tw-text-white tw-mb-3 ms-1">Products Payment History</h1>
+
         </div>
 
-        
         <div class="row tw-mx-auto tw-max-w-7xl tw-w-full">
             <!-- Search Bar -->
-            <div class="tw-w-full tw-mb-4 tw-flex tw-justify-between ">
-                <a class="tw-text-black tw-font-bold py-1 px-2 tw-rounded tw-transition tw-duration-300 ease-in-out tw-bg-[#00e69d] hover:tw-bg-[#00FFAE]" href="product_sales.php">Product Sales</a>
-                
-                <div class="dropdown  tw-flex tw-items-center text-white">
-                    <p class="me-2 tw-font-semibold">Category</p>
-                    <a class="tw-bg-[#EA3EF7] px-2 py-1 tw-rounded-lg tw-text-black dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Monthly
-                    </a>
-
+            <div class="tw-w-full tw-mb-4 tw-flex tw-justify-between tw-items-center">
+                <input type="text" id="searchBar" class="form-control tw-w-full md:tw-w-1/2 tw-p-2 tw-border tw-border-gray-300 tw-rounded-lg" placeholder="Account ID, or Name">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Products
+                    </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="sales_report.php">Over all</a></li>
-                        <li><a class="dropdown-item" href="session_sales_report.php">Session</a></li>
-                        <li><a class="dropdown-item" href="walk_in_sales.php">Walk in</a></li>
-
-
+                        <li><a class="dropdown-item" href="product_payment_history.php">Products</a></li>
                     </ul>
                 </div>
             </div>
+
 
             <div class="col-12 col-md-12 col-lg-12 tw-mx-auto tw-my-5">
                 <div class="table-responsive">
@@ -79,10 +76,10 @@ include 'data_queries/monthly_sales_report_query.php'
                                 <tr>
                                     <th scope="col" class="tw-w-1/12">Account ID</th>
                                     <th scope="col" class="tw-w-2/12">Name</th>
-                                    <th scope="col" class="tw-w-2/12">Reference #</th>
-                                    <th scope="col" class="tw-w-2/12">Expiration Date</th>
-                                    <th scope="col" class="tw-w-1/12">Category</th>
-                                    <th scope="col" class="tw-w-1/12">Amount</th>
+                                    <th scope="col" class="tw-w-2/12">Product Name</th>
+                                    <th scope="col" class="tw-w-2/12">Price</th>
+                                    <th scope="col" class="tw-w-2/12">Product Quantity</th>
+                                    <th scope="col" class="tw-w-2/12">Total</th>
                                     <th scope="col" class="tw-w-1/12">Payment Date</th>
                                 </tr>
                             </thead>
@@ -91,30 +88,38 @@ include 'data_queries/monthly_sales_report_query.php'
                                     <tr>
                                         <td class="tw-text-blue-500 tw-text-center"><?php echo htmlspecialchars($row['users_account_id']); ?></td>
                                         <td class="tw-text-blue-500"><?php echo htmlspecialchars($row['fullname']); ?></td>
-                                        <td class="tw-text-blue-500"><?php echo htmlspecialchars($row['reference_number']); ?></td>
-                                        <td class="tw-text-blue-500"><?php echo htmlspecialchars($row['date_expiration']); ?></td>
-                                        <td class="tw-text-center">
-                                            <?php if ($row['category'] == 'session') { ?>
-                                                <span class="tw-text-[#00FFAE]">session</span>
-                                            <?php } else { ?>
-                                                <span class="tw-text-[#EA3EF7]">monthly</span>
-                                            <?php } ?>
-                                        </td>
-                                        <td class="tw-text-green-500 tw-text-right">₱<?php echo htmlspecialchars($row['amount']); ?></td>
-                                        <td class="tw-text-blue-500"><?php echo htmlspecialchars($row['payment_created']); ?></td>
+                                        <td class="tw-text-blue-500"><?php echo htmlspecialchars($row['product_name']); ?></td>
+                                        <td class="tw-text-blue-500">₱<?php echo htmlspecialchars($row['price']); ?></td>
+                                        <td class="tw-text-blue-500"><?php echo htmlspecialchars($row['product_qty']); ?></td>
+                                        <td class="tw-text-blue-500">₱<?php echo htmlspecialchars($row['product_total']); ?></td>
+                                        <td class="tw-text-blue-500"><?php echo htmlspecialchars($row['date_issued']); ?></td>
+
                                     </tr>
                                 <?php } ?>
                             </tbody>
                         </table>
                     </div>
+                    <div class="text-white">
+                        <?php
+                        $sql = "SELECT SUM(product_total) as total_product_sale FROM product_sales";
+                        $stmt = $conn->prepare($sql);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+                        $total = 0;
+
+                        if ($row = $result->fetch_assoc()) {
+                            $total = $row['total_product_sale'];
+                        }
+                        ?>
+
+
+                    </div>
                 </div>
-                <div class="tw-bg-white tw-text-black tw-py-2 tw-px-4 tw-rounded">
-                    <h1 class="">Total SALES: ₱<?php include 'data_queries/total_sales.php';
-                                                echo htmlspecialchars($total_monthly) ?></h1>
-                </div>
+
             </div>
         </div>
     </div>
+
     <div class="footer tw-text-slate-500 text-center tw-mt-10">
         <div>
             <h1>&copy; 2024 Visionary Creatives X Fitness Boss. All Rights Reserved.</h1>

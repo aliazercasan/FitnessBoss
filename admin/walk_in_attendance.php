@@ -7,28 +7,15 @@ if (!isset($_SESSION['admin_id'])) {
 }
 
 include 'data_queries/config.php';
-$sql = "SELECT 
-    users_account_id,
-    fullname,
-    category,
-    expiration_date,
-    attendance_date
-    FROM 
-        attendance_users
-        
-        UNION ALL
-        
-        SELECT 
-            walk_in_id AS users_account_id,
+$sql = " SELECT 
+         walk_in_id ,
             fullname,
             category,
-            date_expiration as expiration_date,
-            payment_created as attendance_date
+            date_expiration,
+            payment_created
         FROM 
-            walk_in_users
-            
-            ORDER BY 
-    attendance_date DESC";
+            walk_in_users";
+
 
 $result = $conn->query($sql);
 ?>
@@ -77,62 +64,61 @@ $result = $conn->query($sql);
         }
     </style>
 </head>
-<?php include 'header.php'; ?>
 
 <body>
+    <?php include 'header.php' ?>
     <div class="container">
         <div class="content">
             <div class="table-container tw-mt-40">
-                <h1 class="tw-text-4xl"><i class="fas fa-clipboard-list mb-4"></i> Attendance Log Book</h1>
+            <h1 class="tw-text-4xl"><i class="fas fa-clipboard-list mb-4"></i> Attendance Log Book</h1>
                 <div class="tw-flex tw-flex-col md:tw-flex-row tw-justify-between tw-items-center">
                     <div class="tw-w-full tw-mb-4 tw-flex tw-justify-center">
                         <input type="text" id="searchBar" class="form-control tw-w-full md:tw-w-1/2 tw-p-2 tw-border tw-border-gray-300 tw-rounded-lg" placeholder="Search">
                     </div>
                     <div class="dropdown tw-w-full tw-mb-4 md:tw-mb-0 md:tw-w-auto">
                         <button class="tw-bg-[#00FFAE] px-3 py-1 tw-rounded-lg text-black dropdown-toggle mb-3 w-full md:w-auto" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Over All
+                            Walk In
                         </button>
                         <ul class="dropdown-menu tw-w-full md:tw-w-auto">
+                            <li><a class="dropdown-item" href="all_logs.php">Over All</a></li>
                             <li><a class="dropdown-item" href="monthly_attendance.php">Monthly</a></li>
                             <li><a class="dropdown-item" href="session_attendance.php">Session</a></li>
-                            <li><a class="dropdown-item" href="walk_in_attendance.php">Walk In</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <div class="tw-overflow-x-auto tw-max-h-96 tw-scrollbar-thin tw-scrollbar-thumb-gray-400 tw-scrollbar-track-gray-200">
-                        <table class="table table-dark tw-w-full" id="dataTable">
-                            <thead>
+                <div class="table-responsive tw-overflow-auto tw-h-[400px] tw-scrollbar-thin tw-scrollbar-thumb-gray-400 tw-scrollbar-track-gray-200">
+                    <table class="table table-dark tw-w-full" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>Account ID</th>
+                                <th>Name</th>
+                                <th>Monthly or Session</th>
+                                <th>Expiration Date</th>
+                                <th>Attendance Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while ($row = $result->fetch_assoc()) { ?>
                                 <tr>
-                                    <th>Account ID</th>
-                                    <th>Name</th>
-                                    <th>Monthly or Session</th>
-                                    <th>Expiration Date</th>
-                                    <th>Attendance Date</th>
+                                    <td class="tw-text-[#1a8cff]"><?php echo $row['walk_in_id']; ?></td>
+                                    <td><?php echo $row['fullname']; ?></td>
+                                    <td>
+                                        <?php if ($row['category'] == 'session') {
+                                            echo '<span class="tw-text-[#00FFAE]">session</span>';
+                                        } else if ($row['category'] == 'monthly') {
+                                            echo '<span class="tw-text-[#EA3EF7]">monthly</span>';
+                                        } else {
+                                            echo '<span class="tw-text-red-500">walk in</span>';
+                                        } ?>
+                                    </td>
+                                    <td class="tw-text-[#1a8cff]"><?php echo $row['date_expiration']; ?></td>
+                                    <td class="tw-text-[#1a8cff]"><?php echo $row['payment_created']; ?></td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <?php while ($row = $result->fetch_assoc()) { ?>
-                                    <tr>
-                                        <td class="tw-text-[#1a8cff]"><?php echo $row['users_account_id']; ?></td>
-                                        <td class="tw-text-[#]"><?php echo $row['fullname']; ?></td>
-                                        <td class="tw-text-[#1a8cff]">
-                                            <?php if ($row['category'] == 'session') {
-                                                echo '<span class="tw-text-[#00FFAE]">session</span>';
-                                            } else if ($row['category'] == 'monthly') {
-                                                echo '<span class="tw-text-[#EA3EF7]">monthly</span>';
-                                            } else {
-                                                echo '<span class="tw-text-red-500">walk in</span>';
-                                            } ?>
-                                        </td>
-                                        <td class="tw-text-[#1a8cff]"><?php echo $row['expiration_date']; ?></td>
-                                        <td class="tw-text-[#1a8cff]"><?php echo $row['attendance_date']; ?></td>
-                                    </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
-                    </div>
+                            <?php } ?>
+                        </tbody>
+                    </table>
                 </div>
+
             </div>
         </div>
     </div>
@@ -153,9 +139,8 @@ $result = $conn->query($sql);
             rows.forEach(row => {
                 const accountId = row.cells[0].textContent.toLowerCase();
                 const name = row.cells[1].textContent.toLowerCase();
-                const attendanceDate = row.cells[4].textContent.toLowerCase(); // Attendance Date Column
 
-                if (accountId.includes(filter) || name.includes(filter) || attendanceDate.includes(filter)) {
+                if (accountId.includes(filter) || name.includes(filter)) {
                     row.style.display = '';
                 } else {
                     row.style.display = 'none';

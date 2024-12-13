@@ -15,20 +15,8 @@ $sql = "SELECT
     attendance_date
     FROM 
         attendance_users
-        
-        UNION ALL
-        
-        SELECT 
-            walk_in_id AS users_account_id,
-            fullname,
-            category,
-            date_expiration as expiration_date,
-            payment_created as attendance_date
-        FROM 
-            walk_in_users
-            
-            ORDER BY 
-    attendance_date DESC";
+        WHERE category = 'monthly'
+;";
 
 $result = $conn->query($sql);
 ?>
@@ -87,17 +75,9 @@ $result = $conn->query($sql);
                 <div class="tw-flex tw-flex-col md:tw-flex-row tw-justify-between tw-items-center">
                     <div class="tw-w-full tw-mb-4 tw-flex tw-justify-center">
                         <input type="text" id="searchBar" class="form-control tw-w-full md:tw-w-1/2 tw-p-2 tw-border tw-border-gray-300 tw-rounded-lg" placeholder="Search">
+                        
                     </div>
-                    <div class="dropdown tw-w-full tw-mb-4 md:tw-mb-0 md:tw-w-auto">
-                        <button class="tw-bg-[#00FFAE] px-3 py-1 tw-rounded-lg text-black dropdown-toggle mb-3 w-full md:w-auto" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Over All
-                        </button>
-                        <ul class="dropdown-menu tw-w-full md:tw-w-auto">
-                            <li><a class="dropdown-item" href="monthly_attendance.php">Monthly</a></li>
-                            <li><a class="dropdown-item" href="session_attendance.php">Session</a></li>
-                            <li><a class="dropdown-item" href="walk_in_attendance.php">Walk In</a></li>
-                        </ul>
-                    </div>
+                    
                 </div>
                 <div class="table-responsive">
                     <div class="tw-overflow-x-auto tw-max-h-96 tw-scrollbar-thin tw-scrollbar-thumb-gray-400 tw-scrollbar-track-gray-200">

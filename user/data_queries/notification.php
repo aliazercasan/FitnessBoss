@@ -1,8 +1,9 @@
 <?php
 include 'config.php';
 if (isset($_SESSION['users_account_id'])) {
-    // Prepare the SQL query to fetch notifications
-    $sql = "SELECT * FROM users_notification WHERE users_account_id = ?";
+    $sql = "SELECT * FROM users_notification 
+        WHERE users_account_id = ? 
+        ORDER BY message_date DESC";
     $stmt = $conn->prepare($sql);
     if ($stmt) {
         // Bind the user account ID to the query
@@ -20,9 +21,8 @@ if (isset($_SESSION['users_account_id'])) {
             while ($row = $result->fetch_assoc()) {
                 $_SESSION['message'] = $row['message'];
                 $_SESSION['message_date'] = $row['message_date'];
-
             }
-        } 
+        }
 
         // Close the statement
         $stmt->close();
@@ -30,4 +30,3 @@ if (isset($_SESSION['users_account_id'])) {
         echo "Error preparing the query: " . $conn->error;
     }
 }
-?>

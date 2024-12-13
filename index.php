@@ -151,8 +151,8 @@
                     Welcome to FitnessBoss, where fitness meets community. Our mission is to inspire individuals to reach their full potential through personalized training, a supportive environment, and state-of-the-art equipment. Whether you're just starting your fitness journey or are a seasoned athlete, our expert trainers are here to guide you every step of the way. We believe that fitness is more than just a workout—it's about building confidence, improving health, and achieving personal goals. At FitnessBoss, we foster a positive and motivating atmosphere where every member feels empowered to succeed. Join us today and experience the difference in your fitness journey!
                 </p>
             </div>
-            <div class="img-coach tw-w- md:tw-w-1/2 tw-bg-white rounded-circle">
-                <img src="assets/coach4.jpg" alt="" class="tw-w-full tw-h-full md:tw-p-10 tw-p-5" />
+            <div class="img-coach tw-w- md:tw-w-1/2 tw-bg-white rounded-circle z-0">
+                <img src="assets/logo.jpg" alt="" class="tw-w-full tw-h-full md:tw-p-10 tw-p-5" />
             </div>
         </div>
     </div>
@@ -161,7 +161,7 @@
     <!--COACHES PAGE CONTENT-->
     <div class="bg-black tw-py-20" id="coaches">
         <h1 class="text-center tw-text-5xl md:tw-text-6xl mb-5 tw-text-[#EA3EF7] tw-font-bold">
-            MEET THE TEAM
+            MEET THE COACHES
         </h1>
         <!--(COACHES CONTAINER)-->
         <div class="teams d-flex flex-wrap justify-content-center container">
@@ -176,59 +176,11 @@
                         class="card-body position-absolute tw-bottom-0 text-center w-100 tw-text-transparent hover:tw-text-black hover:tw-bg-[#00FFAE] hover:tw-bg-opacity-100 tw-h-full tw-transition tw-duration-300 ease-in-out">
                         <h1 class="tw-mt-20">BRIAN HUNDER</h1>
                         <hr />
-                        <p>FOUNDER & OWNER</p>
+                        <p>Coach</p>
                     </div>
                 </div>
             </div>
-
-            <!--COACH ABRAHAM-->
-            <div class="tw-px-5 tw-mb-5 tw-w-full md:tw-w-1/2 lg:tw-w-1/4">
-                <!--PARENT-->
-                <div
-                    class="card position-relative hover:tw-scale-105 tw-transition tw-duration-300 tw-h-full tw-mx-auto">
-                    <img src="assets/coach5.png class="card-img-top tw-h-[250px]" alt="..." />
-                    <!--CHILD-->
-                    <div
-                        class="card-body position-absolute tw-bottom-0 text-center tw-w-full tw-text-transparent hover:tw-text-black hover:tw-bg-[#00FFAE] hover:tw-bg-opacity-100 tw-h-full tw-transition tw-duration-300 ease-in-out">
-                        <h1 class="tw-mt-20">Moana Bilway</h1>
-                        <hr />
-                        <p>COACH</p>
-                    </div>
-                </div>
-            </div>
-
-            <!--COACH BRIANT-->
-            <div class="tw-px-5 tw-mb-5 tw-w-full md:tw-w-1/2 lg:tw-w-1/4">
-                <!--PARENT-->
-                <div
-                    class="card position-relative hover:tw-scale-105 tw-transition tw-duration-300 tw-h-full tw-mx-auto">
-                    <img src="assets/coach3.jpg" class="card-img-top tw-h-[250px]" alt="..." />
-                    <!--CHILD-->
-                    <div
-                        class="card-body position-absolute tw-bottom-0 text-center w-100 tw-text-transparent hover:tw-text-black hover:tw-bg-[#00FFAE] hover:tw-bg-opacity-100 tw-h-full tw-transition tw-duration-300 ease-in-out">
-                        <h1 class="tw-mt-20">James Estrada</h1>
-                        <hr />
-                        <p>COACH</p>
-                    </div>
-                </div>
-            </div>
-
-            <!--COACH KANOR-->
-            <div class="tw-px-5 tw-mb-5 tw-w-full md:tw-w-1/2 lg:tw-w-1/4">
-                <!--PARENT-->
-                <div
-                    class="card position-relative hover:tw-scale-105 tw-transition tw-duration-300 tw-h-full tw-mx-auto">
-                    <img src="assets/coach4.jpg" class="card-img-top tw-h-[250px]" alt="..." />
-                    <!--CHILD-->
-                    <div
-                        class="card-body position-absolute tw-bottom-0 text-center w-100 tw-text-transparent hover:tw-text-black hover:tw-bg-[#00FFAE] hover:tw-bg-opacity-100 tw-h-full tw-transition tw-duration-300 ease-in-out">
-                        <h1 class="tw-mt-20">James Bitua</h1>
-                        <hr />
-                        <p>COACH</p>
-                    </div>
-                </div>
-            </div>
-
+           
             <!--COACH ALIHANDRO-->
             <div class="tw-px-5 tw-mb-5 tw-w-full md:tw-w-1/2 lg:tw-w-1/4">
                 <!--PARENT-->
@@ -261,37 +213,9 @@
                 </div>
             </div>
 
-            <!--COACH ALEXXA-->
-            <div class="tw-px-5 tw-mb-5 tw-w-full md:tw-w-1/2 lg:tw-w-1/4">
-                <!--PARENT-->
-                <div
-                    class="card position-relative hover:tw-scale-105 tw-transition tw-duration-300 tw-h-full tw-mx-auto">
-                    <img src="assets/coach7.png" class="card-img-top tw-h-[250px]" alt="..." />
-                    <!--CHILD-->
-                    <div
-                        class="card-body position-absolute tw-bottom-0 text-center w-100 tw-text-transparent hover:tw-text-black hover:tw-bg-[#00FFAE] hover:tw-bg-opacity-100 tw-h-full tw-transition tw-duration-300 ease-in-out">
-                        <h1 class="tw-mt-20">ALEXXA MADRID</h1>
-                        <hr />
-                        <p>COACH</p>
-                    </div>
-                </div>
-            </div>
+           
 
-            <!--COACH SOAPEYA-->
-            <div class="tw-px-5 tw-mb-5 tw-w-full md:tw-w-1/2 lg:tw-w-1/4">
-                <!--PARENT-->
-                <div
-                    class="card position-relative hover:tw-scale-105 tw-transition tw-duration-300 tw-h-full tw-mx-auto">
-                    <img src="assets/coach8.png" class="card-img-top tw-h-[250px]" alt="..." />
-                    <!--CHILD-->
-                    <div
-                        class="card-body position-absolute tw-bottom-0 text-center w-100 tw-text-transparent hover:tw-text-black hover:tw-bg-[#00FFAE] hover:tw-bg-opacity-100 tw-h-full tw-transition tw-duration-300 ease-in-out">
-                        <h1 class="tw-mt-20">SOAPEYA FIRST</h1>
-                        <hr />
-                        <p>COACH</p>
-                    </div>
-                </div>
-            </div>
+           
         </div>
     </div>
     <div class="footer tw-text-slate-500 text-center md:tw-text-sm bg-black p-3 tw-text-md">

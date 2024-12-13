@@ -47,15 +47,33 @@ include 'data_queries/sales_report_query.php'
         <div class="d-flex align-items-center justify-content-start tw-mt-20">
             <a href="dashboard-admin.php" class="tw-text-[#EA3EF7] tw-text-3xl tw-mb-3 me-3"><i class="bi bi-arrow-90deg-left"></i></a>
             <img src="../assets/Total Sales.png" alt="">
-            <h1 class="tw-text-3xl tw-font-bold tw-text-white tw-mb-3 ms-1">Sales Report</h1>
+            <h1 class="tw-text-3xl tw-font-bold tw-text-white tw-mb-3 ms-1">Services Sales Report</h1>
 
         </div>
 
         <div class="row tw-mx-auto tw-max-w-7xl tw-w-full">
-            <!-- Search Bar -->
-            <div class="tw-w-full tw-mb-4 tw-flex tw-justify-end ">
-                <div class="dropdown">
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="mb-3">
+                <a class="tw-text-black tw-font-bold py-1 px-2 tw-rounded tw-transition tw-duration-300 ease-in-out tw-bg-[#00e69d] hover:tw-bg-[#00FFAE]" href="product_sales.php">Product Sales</a>
+            </div>
+
+            <div class="tw-w-full tw-mb-4 tw-flex tw-justify-between tw-items-center text-white">
+
+                <!--DAILY SALES CALENDAR-->
+                <div class="text-white tw-text-sm text-center">
+                    <p class="tw-font-semibold">DAILY </p>
+                    <input id="datepicker-format" type="date" class="tw-bg-gray-50 border tw-border-gray-300 tw-text-sm tw-rounded-lg px-2" placeholder="Select date" />
+                </div>
+
+                <!-- MONTHLY AND YEARLT SALES CALENDAR -->
+                <div class="text-white tw-text-sm text-center">
+                    <p class="tw-font-semibold">MONTHLY AND YEARLY</p>
+                    <input id="monthpicker-format" type="month" class="tw-bg-gray-50 border tw-border-gray-300 tw-text-sm tw-rounded-lg px-2" placeholder="Select month" />
+                </div>
+               
+
+                <div class="dropdown  tw-flex tw-items-center">
+                    <p class="me-2 tw-font-semibold">Category</p>
+                    <a class="tw-bg-[#EA3EF7] px-2 py-1 tw-rounded-lg tw-text-black dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Overall
                     </a>
 
@@ -63,7 +81,6 @@ include 'data_queries/sales_report_query.php'
                         <li><a class="dropdown-item" href="monthly_sales_report.php">Monthly</a></li>
                         <li><a class="dropdown-item" href="session_sales_report.php">Session</a></li>
                         <li><a class="dropdown-item" href="walk_in_sales.php">Walk in</a></li>
-                        <li><a class="dropdown-item" href="product_sales.php">Product Sales</a></li>
 
 
                     </ul>
@@ -74,7 +91,7 @@ include 'data_queries/sales_report_query.php'
                 <div class="table-responsive">
                     <div class="tw-overflow-x-auto tw-max-h-96 tw-scrollbar-thin tw-scrollbar-thumb-gray-400 tw-scrollbar-track-gray-200">
                         <table class="table table-dark tw-w-full" id="dataTable">
-                            <thead >
+                            <thead>
                                 <tr>
                                     <th scope="col" class="tw-w-1/12">Account ID</th>
                                     <th scope="col" class="tw-w-2/12">Name</th>
@@ -95,12 +112,12 @@ include 'data_queries/sales_report_query.php'
                                         <td class="tw-text-center">
                                             <?php if ($row['category'] == 'session') { ?>
                                                 <span class="tw-text-[#00FFAE]">session</span>
-                                            <?php } elseif($row['category'] == 'monthly') { ?>
+                                            <?php } elseif ($row['category'] == 'monthly') { ?>
                                                 <span class="tw-text-[#EA3EF7]">monthly</span>
-                                            <?php } else{?>
+                                            <?php } else { ?>
                                                 <span class="tw-text-red-500">walk in</span>
 
-                                           <?php } ?>
+                                            <?php } ?>
                                         </td>
                                         <td class="tw-text-green-500 tw-text-right">₱ <?php echo htmlspecialchars($row['amount']); ?></td>
                                         <td class="tw-text-blue-500"><?php echo htmlspecialchars($row['payment_created']); ?></td>
@@ -111,7 +128,8 @@ include 'data_queries/sales_report_query.php'
                     </div>
                 </div>
                 <div class="tw-bg-white tw-text-black tw-py-2 tw-px-4 tw-rounded mt-2">
-                    <h1 class="">Total SALES: ₱<?php include 'data_queries/total_sales.php'; echo htmlspecialchars($row['total']) ?></h1>
+                    <h1 class="">Total SALES: ₱<?php include 'data_queries/total_sales.php';
+                                                echo htmlspecialchars($row['total']) ?></h1>
                 </div>
             </div>
         </div>
@@ -123,25 +141,69 @@ include 'data_queries/sales_report_query.php'
         </div>
     </div>
 
-    <!-- Search Bar Filtering -->
+    
     <script>
-        document.getElementById('searchBar').addEventListener('keyup', function() {
-            const filter = this.value.toLowerCase();
+        // DAILY CALENDAR FUNCTION
+        document.getElementById('datepicker-format').addEventListener('change', function() {
+            const selectedDate = this.value;
             const rows = document.querySelectorAll('#dataTable tbody tr');
+            let totalSales = 0;
 
             rows.forEach(row => {
-                const receiptId = row.cells[0].textContent.toLowerCase();
-                const accountId = row.cells[1].textContent.toLowerCase();
-                const name = row.cells[2].textContent.toLowerCase();
+                const paymentDate = row.cells[6].textContent.trim();
+                const rowTotal = parseFloat(row.cells[5].textContent.replace('₱', '').replace(',', '')) || 0;
 
-                if (receiptId.includes(filter) || accountId.includes(filter) || name.includes(filter)) {
+                if (paymentDate === selectedDate || !selectedDate) {
                     row.style.display = '';
+                    totalSales += rowTotal;
                 } else {
                     row.style.display = 'none';
                 }
             });
+
+            document.getElementById('totalSalesDisplay').textContent = `₱${totalSales.toLocaleString()}`;
+        });
+
+        document.querySelectorAll('.filter-product').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const selectedProduct = this.getAttribute('data-product');
+                const rows = document.querySelectorAll('#dataTable tbody tr');
+
+                rows.forEach(row => {
+                    if (selectedProduct === 'all' || row.getAttribute('data-product') === selectedProduct) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+
+        // YEARLY AND MONTHLY CALENDAR FUNCTION
+        document.getElementById('monthpicker-format').addEventListener('change', function() {
+            const selectedMonth = this.value; // Format: YYYY-MM
+            const rows = document.querySelectorAll('#dataTable tbody tr');
+            let totalSales = 0;
+
+            rows.forEach(row => {
+                const paymentDate = row.cells[6].textContent.trim().substring(0, 7); // Extract YYYY-MM
+                const rowTotal = parseFloat(row.cells[5].textContent.replace('₱', '').replace(',', '')) || 0;
+
+                if (paymentDate === selectedMonth || !selectedMonth) {
+                    row.style.display = '';
+                    totalSales += rowTotal;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            document.getElementById('totalSalesDisplay').textContent = `₱${totalSales.toLocaleString()}`;
         });
     </script>
+
+        
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

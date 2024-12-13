@@ -42,7 +42,7 @@ include 'data_queries/session_sales_report_query.php'
 <?php include 'header.php'; ?>
 
 <body class="bg-black lg:tw-p-5 md:tw-p-3 tw-p-0 tw-min-h-screen tw-overflow-hidden">
-    <div class="container-fluid tw-min-h-screen tw-flex tw-flex-col mt-5 ">
+    <div class="container-fluid tw-min-h-screen tw-flex tw-flex-col ">
         <div class="d-flex align-items-center justify-content-start tw-mt-20">
             <a href="dashboard-admin.php" class="tw-text-[#EA3EF7] tw-text-3xl tw-mb-3 me-3"><i class="bi bi-arrow-90deg-left"></i></a>
             <img src="../assets/Total Sales.png" alt="">
@@ -51,10 +51,11 @@ include 'data_queries/session_sales_report_query.php'
 
         <div class="row tw-mx-auto tw-max-w-7xl tw-w-full">
             <!-- Search Bar -->
-            <div class="tw-w-full tw-mb-4 tw-flex tw-justify-end ">
-
-                <div class="dropdown">
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="tw-w-full tw-mb-4 tw-flex tw-justify-between ">
+            <a class="tw-text-black tw-font-bold py-1 px-2 tw-rounded tw-transition tw-duration-300 ease-in-out tw-bg-[#00e69d] hover:tw-bg-[#00FFAE]" href="product_sales.php">Product Sales</a>
+                <div class="dropdown  tw-flex tw-items-center">
+                    <p class="me-2 tw-font-semibold text-white">Category</p>
+                    <a class="tw-bg-[#EA3EF7] px-2 py-1 tw-rounded-lg tw-text-black dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Session
                     </a>
 
@@ -98,7 +99,7 @@ include 'data_queries/session_sales_report_query.php'
                                                     <span class="tw-text-pink-500">monthly</span>
                                                 <?php } ?>
                                             </td>
-                                            <td class="tw-text-green-500 tw-text-right"><?php echo htmlspecialchars($row['amount']); ?></td>
+                                            <td class="tw-text-green-500 tw-text-right">₱<?php echo htmlspecialchars($row['amount']); ?></td>
                                             <td class="tw-text-blue-500"><?php echo htmlspecialchars($row['payment_created']); ?></td>
                                         </tr>
                                     <?php } ?>
@@ -107,8 +108,8 @@ include 'data_queries/session_sales_report_query.php'
                         </div>
                     </div>
                     <div class="tw-bg-white tw-text-black tw-py-2 tw-px-4 tw-rounded">
-                        <h1 class="">Total SALES: ₱<?php 
-                        include 'data_queries/total_sales.php';
+                        <h1 class="">Total SALES: ₱<?php
+                                                    include 'data_queries/total_sales.php';
                                                     echo htmlspecialchars($total_session) ?></h1>
                     </div>
                 </div>

@@ -24,9 +24,9 @@
   ?>
 
   <!--JS CHART-->
+  <script src="https://cdn.jsdelivr.net/npm/@kurkle/color@0.1.9"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <canvas id="monthlyChart" width="400" height="200"></canvas>
 
   <script>
     const ctx3 = document.getElementById('monthlyChart3').getContext('2d');
@@ -38,8 +38,8 @@
         datasets: [{
           label: 'Walk In Count',
           data: <?php echo $incomes_js; ?>, // Use dynamically generated incomes
-          backgroundColor: 'rgba(54, 162, 235, 0.5)', // Blue
-          borderColor: 'rgba(54, 162, 235, 1)', // Blue border
+          backgroundColor: '#8E44AD', // Blue
+          borderColor: '#8E44AD', // Blue border
           borderWidth: 1
         }]
       },

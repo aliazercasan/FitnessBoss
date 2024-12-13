@@ -60,11 +60,11 @@ if (!isset($_SESSION['admin_id'])) {
 
                 <!-- Payment Form -->
                 <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
-                    <label for="" class="mt-3 tw-text-xl">Name</label>
+                    <label for="" class="mt-3 tw-text-xl">Fullname</label>
                     <input
                         type="text"
                         class="form-control tw-w-full tw-px-4 tw-py-3 tw-rounded-lg tw-bg-gray-100 tw-text-black focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-green-400"
-                        placeholder="Walk in name"
+                        placeholder="Type here..."
                         name="walk_in_name">
 
                     <label for="" class="mt-3 tw-text-xl">Payment for</label>
